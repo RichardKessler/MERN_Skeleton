@@ -16,10 +16,10 @@ const getErrorMessage = (err) => {
         }
     } else {
         for (let errName in err.errors) {
-            if (err.errors[errName].message)
-            message = err.errors[errName].message
+            if (err.errors[errName].message) message = err.errors[errName].message
         }
     }
+
     return message
 }
 
@@ -34,6 +34,7 @@ const getUniqueErrorMessage = (err) => {
     } catch (ex) {
         output = 'Unique field already exists'
     }
+    
     return output
 }
 
