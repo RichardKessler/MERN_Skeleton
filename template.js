@@ -1,12 +1,12 @@
 export default () => {
-    return `<!doctype html>
-        <html lang="en">
-            <head>
-                <meta charset="utf8">
-                <title> MERN Skeleton</title>
-            </head>
-            <body>
-                <div id="root">Hello World</div>
-            </body>
-        </html>`
+  return `<!doctype html>
+    <html lang="en">
+      <head>
+        <meta cahrset ="utf-8">
+        <title>MERN SKELETON</title>
+      </head>
+      <body>
+        <div id="root">Hello World</div>
+      </body>
+    </html>`
 }
