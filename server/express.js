@@ -13,7 +13,7 @@ import authRoutes from './routes/auth.routes'
 import devBundle from './devBundle'
 
 
-
+const CURRENT_WORKING_DIR = process.cwd()
 const app = express()
 
 // comment out before production
@@ -28,15 +28,28 @@ app.use(compress())
 app.use(helmet())
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors())
+
+app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
+
 // mount routes
 app.use('/', userRoutes)
 app.use('/', authRoutes)
 
-app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
-
-
 app.get('/', (req, res) => {
     res.status(200).send(Template())
+})
+
+app.use((err, req, res, next) => {
+    if (err.name === 'UnauthorizedError') {
+        res.status(401).json({
+            "error" : err.name + ": " + err.message
+        })
+    }else if (err) {
+        res.status(400).json({
+            "error" : err.name + ": " + err.message
+        })
+        console.log(err)
+    }
 })
 
 export default app
