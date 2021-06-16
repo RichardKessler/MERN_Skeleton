@@ -2,6 +2,7 @@ import User from '../models/user.model'
 import jwt from 'jsonwebtoken'
 import expressJwt from 'express-jwt'
 import config from './../../config/config'
+import { RedoTwoTone } from '@material-ui/icons'
 
 // sign the user in if the user passes authorization and assigns a login token for that session
 const signin = async (res, req) => {
@@ -51,11 +52,21 @@ const signout = (req, res) => {
     })
 }
 
+// protects unauthroized login.  checks the request for a valid JWT. If the token is valid the user is authorized. If the token is not valid and authentication error is thrown
+const requireSignin = expressJwt({
+    secret: config.jwtSecret,
+    userProperty: 'auth'
+})
 
-const requireSignin = {}
-
-const hasAuthorization = (req, res) => {
-
+// checks to make sure that the user is only able to change their own information
+const hasAuthorization = (req, res, next) => {
+    const authroized = req.profile && req.auth && req.profile._id == req.auth._id
+    if (!(authroized)) {
+        return res.status('403').json({
+            error: "User is not authorized"
+        })
+    }
+    next()
 }
 
 export default { signin, signout, requireSignin, hasAuthorization }
