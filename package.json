@@ -2,7 +2,7 @@
   "name": "mern_skeleton",
   "version": "1.0.0",
   "description": "a skeleton to build upon for MERN Stack apps",
-  "main": "template.js",
+  "main": "./dist/server.generated.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "development": "nodemon",

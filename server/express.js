@@ -35,7 +35,7 @@ app.use('/', userRoutes)
 app.use('/', authRoutes)
 
 
-app.get('/', (req, ers) => {
+app.get('/', (req, res) => {
     res.status(200).send(Template())
 })
 
