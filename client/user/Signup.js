@@ -1,10 +1,13 @@
+import React from 'react'
+import Card from '@material-ui/core/Card'
+import { CardActions, Button, Icon } from '@material-ui/core'
 import { CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Typography } from "@material-ui/core"
-import { CallMissedSharp } from "@material-ui/icons"
 import { create } from "./api-user.js"
+import { Link } from 'react-router-dom'
 
 
 export default function Signup() {
-
+    const classes = useStyles()
     const [values, setValues] = useState({
         name: '',
         password: '',
@@ -34,7 +37,7 @@ export default function Signup() {
 
     return (
         <div>
-            <Card className={CallMissedSharp.card}>
+            <Card className={classes.card}>
                 <CardContent>
                     <Typography varient="h6" className={classes.title}>
                         Sign Up
